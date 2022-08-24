@@ -25,4 +25,4 @@ kubectl -n dev1 create secret docker-registry registry-credentials  --docker-ser
 
 tanzu package install tap -p tap.tanzu.vmware.com -v $TAP_VERSION --values-file tap-values.yaml -n tap-install
 
-tanzu package install tap -p tap.tanzu.vmware.com -v 1.1.0  --values-file tap3b.yml -n tap-install
+tanzu package install tap -p tap.tanzu.vmware.com -v 1.1.0  --values-file tap-values.yml -n tap-install
