@@ -1,1 +1,0 @@
-  tanzu apps workload create tanzu-java-web-app  --app tanzu-java-web-app  --type web   --git-repo https://github.com/sample-accelerators/tanzu-java-web-app  --git-branch main     --param gitops_ssh_secret=git-secret --param gitops_repository=https://github.com/KamyMantha/config-repo 
