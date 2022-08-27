@@ -1,0 +1,51 @@
+profile: full  
+ceip_policy_disclosed: true # Installation fails if this not set to `true`
+buildservice:
+  kp_default_repository: --REDACTED--
+  kp_default_repository_username: _json_key
+  kp_default_repository_password:  --REDACTED--
+  tanzunet_username: --REDACTED--
+  tanzunet_password: --REDACTED--
+  descriptor_name: "full"
+  enable_automatic_dependency_updates: true
+cnrs:
+  domain_name: --REDACTED--
+  domain_template: "{{.Name}}-{{.Namespace}}.{{.Domain}}"
+supply_chain: testing_scanning
+ootb_supply_chain_testing_scanning:
+  registry:
+    server: --REDACTED--
+    #server: "asia.gcr.io" # TBS will write container images to this OCI registry 
+    repository: --REDACTED--  # contairezed app images will go into this repo 
+  gitops:
+    repository_prefix: https://github.com/KamyMantha/devops-
+    ssh_secret: git-ssh
+learningcenter:
+  ingressDomain: --REDACTED--
+# tap gui
+tap_gui:
+  service_type: ClusterIP
+  ingressEnabled: "true"
+  ingressDomain: --REDACTED--
+  app_config:
+    app:
+      baseUrl: --REDACTED--
+    catalog:
+      locations:
+        - type: url
+          target: --REDACTED--
+    backend:
+      baseUrl: --REDACTED--
+      cors:
+        origin: --REDACTED--
+metadata_store:
+  app_service_type: ClusterIP
+  ingress_enabled: "true"
+  ingress_domain: --REDACTED--
+grype:
+  namespace: --REDACTED-- # (optional) Defaults to default namespace.
+  targetImagePullSecret: "registry-credentials"
+contour:
+  envoy:
+    service:
+      type: LoadBalancer

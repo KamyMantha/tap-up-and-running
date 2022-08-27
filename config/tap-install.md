@@ -47,8 +47,14 @@ kubectl create ns tap-install
 
 tanzu secret registry add tap-registry   --username "_json_key" --password "$(cat /home/azureuser/sa-tap.json)" --server "gcr.io" --export-to-all-namespaces --yes --namespace tap-install
 
+## create registry credentials
+tanzu secret registry update  tap-registry   --username "_json_key" --password "$(cat /home/azureuser/sa-tap.json)" --server "gcr.io" --export-to-all-namespaces --yes --namespace tap-install
+
+## add tap repository
 tanzu package repository add tanzu-tap-repository  --url gcr.io/api-gw-on-gcp/tap-packages:$TAP_VERSION   --namespace tap-install  
-kubectl -n dev1 create secret docker-registry registry-credentials  --docker-server "gcr.io"  --docker-username "_json_key"  --docker-password "$(cat /home/azureuser/sa-tap.json)"
+
+
+## install tap
 
 tanzu package install tap -p tap.tanzu.vmware.com -v $TAP_VERSION --values-file tap-values.yaml -n tap-install
 
