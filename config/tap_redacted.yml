@@ -18,7 +18,7 @@ ootb_supply_chain_testing_scanning:
     #server: "asia.gcr.io" # TBS will write container images to this OCI registry 
     repository: --REDACTED--  # contairezed app images will go into this repo 
   gitops:
-    repository_prefix: https://github.com/KamyMantha/devops-
+    repository_prefix: https://github.com/yourproject/devops-
     ssh_secret: git-ssh
 learningcenter:
   ingressDomain: --REDACTED--
