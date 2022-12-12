@@ -1,0 +1,65 @@
+ceip_policy_disclosed: true
+
+#The above keys are minimum numbers of entries needed in tap-values.yaml to get a functioning TAP Full profile installation.
+
+#Below are the keys which may have default values set, but can be overridden.
+
+profile: full # Can take iterate, build, run, view.
+excluded_packages:
+- policy.apps.tanzu.vmware.com
+supply_chain: basic # Can take testing, testing_scanning.
+
+ootb_supply_chain_basic: # Based on supply_chain set above, can be changed to ootb_supply_chain_testing, ootb_supply_chain_testing_scanning.
+  registry:
+    server: ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
+    # The prefix of the ECR repository.  Workloads will need
+    # two repositories created:
+    #
+    # tanzu-application-platform/<workloadname>-<namespace>
+    # tanzu-application-platform/<workloadname>-<namespace>-bundle
+    repository: tanzu-application-platform
+buildservice:
+  kp_default_repository: ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/tap-build-service
+  # Enable the build service k8s service account to bind to the AWS IAM Role
+  kp_default_repository_aws_iam_role_arn: "arn:aws:iam::${AWS_ACCOUNT_ID}:role/tap-build-service"
+  #exclude_dependencies: true
+ootb_templates:
+  # Enable the config writer service to use cloud based iaas authentication
+  # which are retrieved from the developer namespace service account by
+  # default
+  iaas_auth: true
+learningcenter:
+  ingressDomain: learning-center.tap-lab.kamymantha.ninja
+ootb_delivery_basic:
+  service_account: default
+tap_gui:
+  ingressEnabled: true
+  ingressDomain: tap-lab.kamymantha.ninja
+  service_type: ClusterIP
+  app_config:
+    supplyChain:
+      enablePlugin: true
+    auth:
+      allowGuestAccess: true
+    backend:
+      baseUrl: http://tap-gui.tap-lab.kamymantha.ninja
+      cors:
+        origin: http://tap-gui.tap-lab.kamymantha.ninja
+    app:
+      baseUrl: http://tap-gui.tap-lab.kamymantha.ninja
+metadata_store:
+  ingressEnabled: true
+  ingressDomain: tap-lab.kamymantha.ninja
+  app_service_type: ClusterIP
+contour:
+  infrastructure_provider: aws
+  envoy:
+    service:
+      aws:
+        LBType: nlb
+cnrs:
+  domain_name: tap.tap-lab.kamymantha.ninja
+scanning:
+  metadataStore:
+    url: "" # Configuration is moved, so set this string to empty.
+
